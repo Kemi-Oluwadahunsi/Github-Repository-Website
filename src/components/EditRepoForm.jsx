@@ -16,13 +16,13 @@ const EditRepoForm = ({ repoName, setShowEditRepoForm, }) => {
 
     try {
       if (repoName.toLowerCase().includes("demo")) {
-        // Check if repoName contains "demo"
+        // Checking if repoName contains "demo"
         await updateRepo(repoData, repoName);
         setShowEditRepoForm(false); // Close the form after updating
-        await Swal.fire("Success!", "Repo updated successfully!", "success");
+        await Swal.fire("Success!", "Repo updated successfully! Kindly refresh the page.", "success");
          window.location.reload();
       } else {
-        // Display a message or take alternative action if repoName doesn't contain "demo"
+        // Displaying a message if repoName doesn't contain "demo"
         console.error("Repository name does not contain the keyword 'demo'.");
         Swal.fire(
           "Error",
