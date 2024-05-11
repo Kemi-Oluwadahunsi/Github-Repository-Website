@@ -6,6 +6,7 @@ import { useEffect } from "react";
 import RepoDetails from "./components/RepoDetails";
 import ComponentWithError from "./components/ComponentWithError";
 import NotFound from "./components/NotFound";
+import Footer from "./components/Footer";
 
 function App() {
   const location = useLocation();
@@ -24,6 +25,7 @@ function App() {
           <Route path="/error-testing" element={<ComponentWithError />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
+        <Footer />
       </div>
     </>
   );

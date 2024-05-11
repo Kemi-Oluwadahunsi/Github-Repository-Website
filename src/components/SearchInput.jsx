@@ -7,7 +7,7 @@ const SeachInput = ({ onChange }) => {
     };
   return (
     <div>
-      <div className=" border border-tertiary px-7 py-2 outline outline-[#82c7f7] bg-primary rounded-[2.5rem]">
+      <div className=" border border-tertiary px-7 sm:px-3 xs:px-2 py-2 xs:py-1 sm:py-1 outline outline-[#82c7f7] bg-primary rounded-[2.5rem]">
         <div className="flex items-center justify-between ">
           <input
             type="search"

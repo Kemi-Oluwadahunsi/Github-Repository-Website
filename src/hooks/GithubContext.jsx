@@ -118,6 +118,7 @@ export const GitHubProvider = ({ children }) => {
         setRepos(data);
         setLoading(false);
       } catch (error) {
+        setLoading(false);
         console.log(error);
       }
     };
@@ -141,6 +142,86 @@ export const GitHubProvider = ({ children }) => {
     setFilteredRepos(null);
   };
 
+  const accessToken = import.meta.env.VITE_APP_TOKEN;
+  // const accessToken = "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";
+  
+
+  const createRepo = async (repoData) => {
+    // const username = "Kemi-Oluwadahunsi";
+    try {
+      const response = await axios.post(
+        "https://api.github.com/user/repos",
+        repoData,
+        {
+          headers: {
+            Authorization: `token ${accessToken}`,
+          },
+        }
+      );
+      return response.data;
+    } catch (error) {
+      throw new Error("Failed to create repository");
+    }
+  };
+
+  const updateRepo = async (repoData, repoName) => {
+    const username = "Kemi-Oluwadahunsi";
+    try {
+      const response = await axios.patch(
+        `https://api.github.com/repos/${username}/${repoName}`,
+        repoData,
+        {
+          headers: {
+            Authorization: `token ${import.meta.env.VITE_APP_TOKEN}`,
+          },
+        }
+      );
+      console.log (repoName)
+      console.log(repoData)
+      return response.data;
+     
+    } catch (error) {
+      throw new Error("Failed to update repository");
+    }
+  };
+
+
+
+  const deleteRepo = async (repoName ) => {
+    const username = "Kemi-Oluwadahunsi";
+    try {
+      const response = await axios.delete(
+        `https://api.github.com/repos/${username}/${repoName}`,
+        {
+          headers: {
+            Authorization: `token ${accessToken}`,
+            
+          },
+        }
+      );
+
+      // Check rate limit status
+      const rateLimitRemaining = response.headers["x-ratelimit-remaining"];
+      if (rateLimitRemaining === "0") {
+        const rateLimitReset = new Date(
+          response.headers["x-ratelimit-reset"] * 1000
+        );
+        // Calculate time until rate limit reset
+        const now = new Date();
+        const timeToReset = (rateLimitReset - now) / 1000;
+        console.log(
+          `Rate limit exceeded. Please wait ${timeToReset} seconds until the rate limit is reset.`
+        );
+        // Implement retry mechanism or inform the user
+      }
+      console.log(response.data);
+      return response.data;
+    } catch (error) {
+      throw new Error("Failed to delete repository");
+    }
+  };
+
+
 
   const value = {
     repos: filteredRepos !== null ? filteredRepos : repos,
@@ -148,6 +229,10 @@ export const GitHubProvider = ({ children }) => {
     handleForkedFilter,
     clearFilter,
     loading,
+    createRepo,
+    updateRepo,
+    deleteRepo,
+    accessToken,
   };
 
   return (
