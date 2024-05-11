@@ -143,11 +143,9 @@ export const GitHubProvider = ({ children }) => {
   };
 
   const accessToken = import.meta.env.VITE_APP_TOKEN;
-  // const accessToken = "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";
   
 
   const createRepo = async (repoData) => {
-    // const username = "Kemi-Oluwadahunsi";
     try {
       const response = await axios.post(
         "https://api.github.com/user/repos",

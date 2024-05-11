@@ -36,7 +36,7 @@ const Sidebar = ({ handleRepoClick, accessToken }) => {
        console.error("Error deleting repository:", error.message);
        Swal.fire(
          "Error",
-         'Only repos containing "demo" in the name can be deleted.',
+         'Error deleting repository.',
          "error"
        );
      }
