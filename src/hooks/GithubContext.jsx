@@ -111,15 +111,22 @@ export const GitHubProvider = ({ children }) => {
 
 
 
-  const deleteRepo = async (repoName ) => {
+  const deleteRepo = async (repoName) => {
     const username = "Kemi-Oluwadahunsi";
     try {
+      // Ask for confirmation before deleting the repository
+      const confirmDelete = window.confirm(
+        `Are you sure you want to delete the repository "${repoName}"?`
+      );
+      if (!confirmDelete) {
+        return; // Cancel the deletion if the user cancels the confirmation
+      }
+
       const response = await axios.delete(
         `https://api.github.com/repos/${username}/${repoName}`,
         {
           headers: {
             Authorization: `token ${accessToken}`,
-            
           },
         }
       );
