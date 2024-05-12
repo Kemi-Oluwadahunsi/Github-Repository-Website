@@ -1,4 +1,3 @@
-// RepoDetails.js
 import { useEffect, useState } from "react";
 import Sidebar from "./Sidebar";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -10,7 +9,6 @@ import {
   faUserAlt,
   faX,
 } from "@fortawesome/free-solid-svg-icons";
-// import GitHubContext from "../hooks/GithubContext";
 
 const RepoDetails = ({ repos }) => {
   const [selectedRepo, setSelectedRepo] = useState(null);
@@ -22,7 +20,7 @@ const RepoDetails = ({ repos }) => {
       setIsWideScreen(window.innerWidth > 900);
     };
 
-    handleResize(); // Call it initially
+    handleResize();
     window.addEventListener("resize", handleResize);
     return () => {
       window.removeEventListener("resize", handleResize);
