@@ -113,11 +113,13 @@ useEffect(() => {
 
     fetchRepos();
   }, []);
+```
 
 8. Also, remember to add your authentication token to a **.env** file as it is in the **.env.example** file.
 
 ```javascript
 VITE_APP_TOKEN=gh_736546738289298283877446....... \\The value of is the GitHub personal authentication token (Classic) of your GitHub App.
+```
 
 ## Contributing
 
