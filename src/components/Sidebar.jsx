@@ -18,29 +18,24 @@ const Sidebar = ({ handleRepoClick, accessToken }) => {
    const handleDeleteButtonClick = async (repoName) => {
      try {
        if (repoName.toLowerCase().includes("demo")) {
-         await deleteRepo(repoName, accessToken);
-          await Swal.fire(
-            "Success!",
-            "Repo deleted successfully!",
-            "success"
-          );
-          window.location.reload();
+         const deleted = await deleteRepo(repoName, accessToken);
+         if (deleted) {
+           await Swal.fire("Success!", "Repo deleted successfully!", "success");
+           window.location.reload();
+         }
        } else {
-        Swal.fire(
-          "Error",
-          'Only repos containing "demo" in the name can be deleted.',
-          "error"
-        );
+         Swal.fire(
+           "Error",
+           'Only repos containing "demo" in the name can be deleted.',
+           "error"
+         );
        }
      } catch (error) {
        console.error("Error deleting repository:", error.message);
-       Swal.fire(
-         "Error",
-         'Error deleting repository.',
-         "error"
-       );
+       Swal.fire("Error", "Error deleting repository.", "error");
      }
    };
+
 
   const filterRepos = repos.filter((repo) =>
     repo.name.toLowerCase().includes(searchQuery.toLowerCase())
