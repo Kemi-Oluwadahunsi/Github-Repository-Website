@@ -20,7 +20,7 @@ const formatLastUpdated = (updatedTime) => {
   }
 };
 
-// Create a provider component
+
 export const GitHubProvider = ({ children }) => {
   const [repos, setRepos] = useState([]);
   const [filteredRepos, setFilteredRepos] = useState(null);
@@ -52,6 +52,7 @@ export const GitHubProvider = ({ children }) => {
     fetchRepos();
   }, []);
 
+  // Filtering functions
   const handleOldestFilter = () => {
     const oldestRepos = [...repos].sort(
       (a, b) => new Date(a.created_at) - new Date(b.created_at)
@@ -68,9 +69,10 @@ export const GitHubProvider = ({ children }) => {
     setFilteredRepos(null);
   };
 
+  // authorization token
   const accessToken = import.meta.env.VITE_APP_TOKEN;
   
-
+  // Function to create a repo
   const createRepo = async (repoData) => {
     try {
       const response = await axios.post(
@@ -87,7 +89,8 @@ export const GitHubProvider = ({ children }) => {
       throw new Error("Failed to create repository");
     }
   };
-
+  
+  // Funtion to update a repo
   const updateRepo = async (repoData, repoName) => {
     const username = "Kemi-Oluwadahunsi";
     try {
@@ -110,11 +113,11 @@ export const GitHubProvider = ({ children }) => {
   };
 
 
-
+  // Function to delete a repo
   const deleteRepo = async (repoName) => {
     const username = "Kemi-Oluwadahunsi";
     try {
-      // Ask for confirmation before deleting the repository
+      // Asking for confirmation before deleting the repository
       const confirmDelete = window.confirm(
         `Are you sure you want to delete the repository "${repoName}"?`
       );
