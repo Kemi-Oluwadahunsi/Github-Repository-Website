@@ -89,7 +89,6 @@ const EditRepoForm = ({ repoName, setShowEditRepoForm, }) => {
             />
           </div>
 
-          {/* Add more fields as needed */}
           <div className="flex gap-8 md:gap-4 xs:flex-col xs:gap-4">
             <button
               type="submit"

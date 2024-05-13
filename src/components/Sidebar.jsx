@@ -14,28 +14,27 @@ const Sidebar = ({ handleRepoClick, accessToken }) => {
   const [showEditRepoForm, setShowEditRepoForm] = useState(false);
   const [editRepoName, setEditRepoName] = useState("");
 
-   // Function to handle delete button click
-   const handleDeleteButtonClick = async (repoName) => {
-     try {
-       if (repoName.toLowerCase().includes("demo")) {
-         const deleted = await deleteRepo(repoName, accessToken);
-         if (deleted) {
-           await Swal.fire("Success!", "Repo deleted successfully!", "success");
-           window.location.reload();
-         }
-       } else {
-         Swal.fire(
-           "Error",
-           'Only repos containing "demo" in the name can be deleted.',
-           "error"
-         );
-       }
-     } catch (error) {
-       console.error("Error deleting repository:", error.message);
-       Swal.fire("Error", "Error deleting repository.", "error");
-     }
-   };
-
+  // Function to handle delete button click
+  const handleDeleteButtonClick = async (repoName) => {
+    try {
+      if (repoName.toLowerCase().includes("demo")) {
+        const deleted = await deleteRepo(repoName, accessToken);
+        if (deleted) {
+          await Swal.fire("Success!", "Repo deleted successfully!", "success");
+          window.location.reload();
+        }
+      } else {
+        Swal.fire(
+          "Error",
+          'Only repos containing "demo" in the name can be deleted.',
+          "error"
+        );
+      }
+    } catch (error) {
+      console.error("Error deleting repository:", error.message);
+      Swal.fire("Error", "Error deleting repository.", "error");
+    }
+  };
 
   const filterRepos = repos.filter((repo) =>
     repo.name.toLowerCase().includes(searchQuery.toLowerCase())
@@ -53,7 +52,7 @@ const Sidebar = ({ handleRepoClick, accessToken }) => {
 
   const handleNewRepoButtonClick = () => {
     setShowNewRepoForm(true);
-  }
+  };
 
   return (
     <div className="flex flex-col gap-8 pt-4 relative xs:pb-8 sm:pb-8">
