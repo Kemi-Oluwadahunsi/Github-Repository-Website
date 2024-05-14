@@ -1,6 +1,8 @@
 import { useContext, useState } from "react";
 import GitHubContext from "../hooks/GithubContext";
 import Swal from "sweetalert2";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faWarning } from "@fortawesome/free-solid-svg-icons";
 
 const AddNewRepoForm = ({ setShowNewRepoForm }) => {
   const { createRepo } = useContext(GitHubContext);
@@ -44,6 +46,15 @@ const AddNewRepoForm = ({ setShowNewRepoForm }) => {
   return (
     <div className="absolute top-[5%] z-50 w-full px-[2rem] md:px-4">
       <div className="flex flex-col gap-4">
+        <div className="flex gap-1 ">
+          <FontAwesomeIcon
+            icon={faWarning}
+            className="text-[#D91F06] text-lg"
+          />
+          <span className="text-[#f1f8fe] text-sm">
+            It is compulsory to add the keyword &quot;Demo&quot; to the repo name for edit and delete purpose.
+          </span>
+        </div>
         <h2 className="text-[#f1f8fe] font-bold text-center text-2xl xs:text-lg">
           Add New Repository
         </h2>

@@ -1,6 +1,8 @@
 import { useContext, useState } from "react";
 import GitHubContext from "../hooks/GithubContext";
 import Swal from "sweetalert2";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faWarning } from "@fortawesome/free-solid-svg-icons";
 
 const EditRepoForm = ({ repoName, setShowEditRepoForm, }) => {
   const { updateRepo } = useContext(GitHubContext);
@@ -102,6 +104,16 @@ const EditRepoForm = ({ repoName, setShowEditRepoForm, }) => {
             >
               Cancel
             </button>
+          </div>
+
+          <div className="flex gap-1 ">
+            <FontAwesomeIcon
+              icon={faWarning}
+              className="text-[#D91F06] text-lg"
+            />
+            <span className="text-[#f1f8fe] text-sm">
+              Remember to add the keyword &quot;Demo&quot; to the repo name
+            </span>
           </div>
         </form>
       </div>

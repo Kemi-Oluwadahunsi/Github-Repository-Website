@@ -115,13 +115,13 @@ const Sidebar = ({ handleRepoClick, accessToken }) => {
       )}
 
       {showNewRepoForm && (
-        <div className="absolute top-[30%] sm:top-0 xs:top-0 py-[5rem] w-[100%] h-[30rem] xs:h-[31rem] z-50 shadow-2xl bg-[#0c4d80] rounded">
+        <div className="absolute top-[20%] sm:top-0 xs:top-0 py-[5rem] w-[100%] h-[30rem] xs:h-[31rem] z-50 shadow-2xl bg-[#0c4d80] rounded">
           <AddNewRepoForm setShowNewRepoForm={setShowNewRepoForm} />
         </div>
       )}
 
       {showEditRepoForm && (
-        <div className="absolute top-[20%] sm:top-0 xs:top-0 py-[5rem] w-[100%] h-[30rem] xs:h-[33rem] z-50 shadow-2xl bg-[#0c4d80] rounded">
+        <div className="absolute top-[20%] sm:top-0 xs:top-0 py-[5rem] w-[100%] h-[33rem] xs:h-[33rem] z-50 shadow-2xl bg-[#0c4d80] rounded">
           <EditRepoForm
             repoName={editRepoName}
             setShowEditRepoForm={setShowEditRepoForm}
