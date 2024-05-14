@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import Logo from "../assets/logo.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars, faTimes } from "@fortawesome/free-solid-svg-icons";
+import "animate.css";
 
 const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -59,7 +60,8 @@ const Header = () => {
 
         {/* Mobile Menu */}
         {menuOpen && (
-          <ul className="md:hidden lg:hidden absolute top-[7rem] left-[50%] xs:left-[30%] h-[30rem] pt-[3rem] right-0 bg-[#10416A] xs:w-[70%] w-[50%] flex flex-col gap-10 items-center text-white text-2xl xs:text-lg z-[999]">
+          
+          <ul className="animate__animated animate__fadeInBottomRight md:hidden lg:hidden absolute top-[7rem] left-[50%] xs:left-[30%] h-[30rem] pt-[3rem] right-0 bg-[#10416A] xs:w-[70%] w-[50%] flex flex-col gap-10 items-center text-white text-2xl xs:text-lg z-[999]">
             <Link to={"/"}>
               <li onClick={closeMenu}>All Repos</li>
             </Link>

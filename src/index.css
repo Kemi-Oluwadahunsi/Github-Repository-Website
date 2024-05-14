@@ -26,3 +26,58 @@
 @keyframes l14{ 
   100%{transform: rotate(1turn)}
 }
+
+.scroll-buttons .btn-Scroll {
+  position: fixed;
+  bottom: 2rem;
+  font-size: 2rem;
+  z-index: 10001;
+  cursor: pointer;
+  padding: 0.05em 0.3em;
+  color: #dedfe1;
+  right: 1.6%;
+  border-radius: 50px;
+  border: none;
+  opacity: 0.9;
+  background-color: #0c4c80;
+}
+
+@media screen and (min-width: 481px) and (max-width: 900px) {
+  .scroll-buttons .btn-Scroll {
+    bottom: 2rem;
+    font-size: 2.4rem;
+  }
+  .scroll-buttons .btn-Scroll html {
+    scroll-snap-type: none;
+    scroll-snap-align: none;
+  }
+  .scroll-buttons .btn-Scroll #section {
+    height: 30rem;
+  }
+}
+
+@media screen and (min-width: 481px) and (max-width: 768px) {
+  .scroll-buttons .btn-Scroll {
+    font-size: 1.7rem;
+    padding: 0.05em 0.3em;
+    bottom: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .scroll-buttons .btn-Scroll {
+    bottom: 1rem;
+    font-size: 2.1rem;
+    right: 2%;
+  }
+  .scroll-buttons .btn-Scroll html {
+    scroll-snap-type: none;
+    scroll-snap-align: none;
+  }
+
+  .scroll-buttons .btn-Scroll {
+    font-size: 1.4rem;
+    padding: 0.05em 0.3em;
+    bottom: 1rem;
+  }
+}

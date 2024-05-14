@@ -7,6 +7,7 @@ import RepoDetails from "./components/RepoDetails";
 import ComponentWithError from "./components/ComponentWithError";
 import NotFound from "./components/NotFound";
 import Footer from "./components/Footer";
+import ScrollArrow from "./components/ScrollArrow";
 
 function App() {
   const location = useLocation();
@@ -19,6 +20,7 @@ function App() {
     <>
       <div>
         <Header />
+        <ScrollArrow />
         <Routes>
           <Route path="/" element={<AllRepos />} />
           <Route path="/repo-details" element={<RepoDetails />} />
