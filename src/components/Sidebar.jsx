@@ -8,20 +8,20 @@ import AddNewRepoForm from "./AddNewRepoForm";
 import Swal from "sweetalert2";
 
 const Sidebar = ({ handleRepoClick, accessToken }) => {
-  const { repos, loading, deleteRepo } = useContext(GitHubContext);
+  const { repos, loading, deleteRepo,} = useContext(GitHubContext);
   const [searchQuery, setSearchQuery] = useState("");
   const [showNewRepoForm, setShowNewRepoForm] = useState(false);
   const [showEditRepoForm, setShowEditRepoForm] = useState(false);
   const [editRepoName, setEditRepoName] = useState("");
+  const [repoDescription, setRepoDescription] = useState(""); 
 
   // Function to handle delete button click
   const handleDeleteButtonClick = async (repoName) => {
     try {
       if (repoName.toLowerCase().includes("demo")) {
-        const deleted = await deleteRepo(repoName, accessToken);
-        if (deleted) {
-          await Swal.fire("Success!", "Repo deleted successfully!", "success");
-          window.location.reload();
+        const deletedRepo = await deleteRepo(repoName, accessToken);
+        if (deletedRepo) {
+       Swal.fire("Success!", "Repo deleted successfully!", "success");
         }
       } else {
         Swal.fire(
@@ -45,8 +45,9 @@ const Sidebar = ({ handleRepoClick, accessToken }) => {
     setSearchQuery(value);
   };
 
-  const handleEditButtonClick = (repoName) => {
+  const handleEditButtonClick = (repoName, repoDescription) => {
     setEditRepoName(repoName);
+    setRepoDescription(repoDescription);
     setShowEditRepoForm(true);
   };
 
@@ -84,9 +85,9 @@ const Sidebar = ({ handleRepoClick, accessToken }) => {
                   onClick={() => handleRepoClick(repo)}
                 >
                   <FontAwesomeIcon icon={faGithub} />
-                  <p className="font-medium text-lg xs:text-base">
+                  <div className="font-medium text-lg xs:text-base caret-transparent">
                     {repo.name}
-                  </p>
+                  </div>
                 </div>
 
                 {repo.name.toLowerCase().includes("demo") && (
@@ -125,6 +126,7 @@ const Sidebar = ({ handleRepoClick, accessToken }) => {
           <EditRepoForm
             repoName={editRepoName}
             setShowEditRepoForm={setShowEditRepoForm}
+            repoDescription={repoDescription}
           />
         </div>
       )}

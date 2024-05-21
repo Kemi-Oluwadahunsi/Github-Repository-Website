@@ -51,7 +51,11 @@ const RepoDetails = ({ repos }) => {
     <div className="border-l-[14px] border-[#0c4d80] pt-[2rem]">
       <div className="flex gap-[4rem] px-[5rem] md:px-[3rem] xs:px-[1rem] sm:px-[5rem] justify-center">
         <div className="basis-[30%] xs:basis-[100%] sm:basis-[60%] border-r-4 xs:border-r-0 sm:border-r-0 border-[#0b2946] pr-12 xs:pr-0 sm:pr-0 pt-4  ">
-          <Sidebar repos={repos} handleRepoClick={handleRepoClick} />
+          <Sidebar
+            repos={repos}
+            handleRepoClick={handleRepoClick}
+            
+          />
         </div>
 
         {isWideScreen ? (

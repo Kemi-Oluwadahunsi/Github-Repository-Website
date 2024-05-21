@@ -6,12 +6,18 @@ import SearchInput from "./SearchInput"
 import { LuListFilter } from "react-icons/lu";
 
 const AllRepos = () => {
-  const { repos, handleForkedFilter, handleOldestFilter, clearFilter, loading } =
-    useContext(GitHubContext);
+  const {
+    repos,
+    handleForkedFilter,
+    handleOldestFilter,
+    clearFilter,
+    loading,
+  } = useContext(GitHubContext);
   const [showFilterOptions, setShowFilterOptions] = useState(false);
   const [filteredRepos, setFilteredRepos] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
   const [searchQuery, setSearchQuery] = useState("");
+  const [isForkedFilter, setIsForkedFilter] = useState(false); // New state to track forked filter
   const reposPerPage = 9;
 
   const indexOfLastRepo = currentPage * reposPerPage;
@@ -27,7 +33,7 @@ const AllRepos = () => {
       top: 0,
       behavior: "smooth",
     });
-  }
+  };
 
   const handleNextPage = () => {
     setCurrentPage((prevPage) => prevPage + 1);
@@ -55,6 +61,7 @@ const AllRepos = () => {
     clearFilter();
     setFilteredRepos(null);
     setShowFilterOptions(false);
+     setIsForkedFilter(false);
   };
 
   // Function to handle search input change
@@ -168,7 +175,7 @@ const AllRepos = () => {
               ))}
         </div>
       )}
-
+      {/* 
       <div className="">
         <div className="flex items-center justify-between gap-8">
           <button
@@ -187,6 +194,33 @@ const AllRepos = () => {
             Next
           </button>
         </div>
+      </div> */}
+
+      <div className="">
+        {!isForkedFilter && ( // Conditionally render pagination buttons
+          <div className="flex items-center justify-between gap-8">
+            <button
+              onClick={handlePrevPage}
+              disabled={currentPage === 1}
+              className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+            >
+              Previous
+            </button>
+            <span className="font-medium">{currentPage}</span>
+            <button
+              onClick={handleNextPage}
+              disabled={indexOfLastRepo >= repos.length}
+              className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+            >
+              Next
+            </button>
+          </div>
+        )}
+        {isForkedFilter && ( // Conditionally render current page number
+          <div className="flex items-center justify-center">
+            <span className="font-medium">{currentPage}</span>
+          </div>
+        )}
       </div>
     </div>
   );

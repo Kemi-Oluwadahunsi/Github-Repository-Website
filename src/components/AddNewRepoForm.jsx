@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faWarning } from "@fortawesome/free-solid-svg-icons";
 
 const AddNewRepoForm = ({ setShowNewRepoForm }) => {
-  const { createRepo } = useContext(GitHubContext);
+  const { createRepo, setRepos } = useContext(GitHubContext);
 
   const [repoData, setRepoData] = useState({
     name: "",
@@ -24,7 +24,8 @@ const AddNewRepoForm = ({ setShowNewRepoForm }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await createRepo(repoData);
+      const newRepo = await createRepo(repoData);
+
       // Close the form after creating the repo
       setShowNewRepoForm(false);
       await Swal.fire(
@@ -32,7 +33,8 @@ const AddNewRepoForm = ({ setShowNewRepoForm }) => {
         "Repository created successfully! Kindly refresh the page.",
         "success"
       );
-       window.location.reload();
+       setRepos((prevRepos) => [newRepo, ...prevRepos]);
+
     } catch (error) {
       console.error("Error creating repository:", error.message);
       Swal.fire(

@@ -134,22 +134,11 @@ export const GitHubProvider = ({ children }) => {
         }
       );
 
-      // Check rate limit status
-      const rateLimitRemaining = response.headers["x-ratelimit-remaining"];
-      if (rateLimitRemaining === "0") {
-        const rateLimitReset = new Date(
-          response.headers["x-ratelimit-reset"] * 1000
-        );
-        // Calculate time until rate limit reset
-        const now = new Date();
-        const timeToReset = (rateLimitReset - now) / 1000;
-        console.log(
-          `Rate limit exceeded. Please wait ${timeToReset} seconds until the rate limit is reset.`
-        );
-        // Implement retry mechanism or inform the user
-      }
-      console.log(response.data);
+      setRepos((prevRepos) =>
+        prevRepos.filter((repo) => repo.name !== repoName)
+      );
       return response.data;
+
     } catch (error) {
       throw new Error("Failed to delete repository");
     }
@@ -166,6 +155,7 @@ export const GitHubProvider = ({ children }) => {
     createRepo,
     updateRepo,
     deleteRepo,
+    setRepos,
     accessToken,
   };
 

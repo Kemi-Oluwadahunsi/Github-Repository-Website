@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faWarning } from "@fortawesome/free-solid-svg-icons";
 
 const EditRepoForm = ({ repoName, setShowEditRepoForm, }) => {
-  const { updateRepo } = useContext(GitHubContext);
+  const { updateRepo, setRepos } = useContext(GitHubContext);
   const [formData, setFormData] = useState({
     name: "",
     description: "",
@@ -20,9 +20,13 @@ const EditRepoForm = ({ repoName, setShowEditRepoForm, }) => {
       if (repoName.toLowerCase().includes("demo")) {
         // Checking if repoName contains "demo"
         await updateRepo(repoData, repoName);
-        setShowEditRepoForm(false); // Close the form after updating
+        setShowEditRepoForm(false); // Close the form after updating the repo
         await Swal.fire("Success!", "Repo updated successfully! Kindly refresh the page.", "success");
-         window.location.reload();
+         setRepos((prevRepos) =>
+           prevRepos.map((repo) =>
+             repo.name === repoName ? { ...repo, ...repoData } : repo
+           )
+         );
       } else {
         // Displaying a message if repoName doesn't contain "demo"
         console.error("Repository name does not contain the keyword 'demo'.");
