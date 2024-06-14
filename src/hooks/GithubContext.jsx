@@ -60,6 +60,7 @@ export const GitHubProvider = ({ children }) => {
     setFilteredRepos(oldestRepos);
   };
 
+
   const handleForkedFilter = () => {
     const forkedRepos = repos.filter((repo) => repo.fork);
     setFilteredRepos(forkedRepos);
@@ -71,7 +72,7 @@ export const GitHubProvider = ({ children }) => {
 
   // authorization token
   const accessToken = import.meta.env.VITE_APP_TOKEN;
-  
+
   // Function to create a repo
   const createRepo = async (repoData) => {
     try {
@@ -89,7 +90,7 @@ export const GitHubProvider = ({ children }) => {
       throw new Error("Failed to create repository");
     }
   };
-  
+
   // Funtion to update a repo
   const updateRepo = async (repoData, repoName) => {
     const username = "Kemi-Oluwadahunsi";
@@ -103,15 +104,13 @@ export const GitHubProvider = ({ children }) => {
           },
         }
       );
-      console.log (repoName)
-      console.log(repoData)
+      console.log(repoName);
+      console.log(repoData);
       return response.data;
-     
     } catch (error) {
       throw new Error("Failed to update repository");
     }
   };
-
 
   // Function to delete a repo
   const deleteRepo = async (repoName) => {
@@ -138,13 +137,10 @@ export const GitHubProvider = ({ children }) => {
         prevRepos.filter((repo) => repo.name !== repoName)
       );
       return response.data;
-
     } catch (error) {
       throw new Error("Failed to delete repository");
     }
   };
-
-
 
   const value = {
     repos: filteredRepos !== null ? filteredRepos : repos,

@@ -45,6 +45,13 @@ const RepoDetails = ({ repos }) => {
      setShowDetails(false);
     setSelectedRepo(null);
   };
+
+  const handleRepoDeleted = (repoName) => {
+    if (selectedRepo && selectedRepo.name === repoName) {
+      handleRepoClose();
+      console.log("Repo deleted:", repoName);
+    }
+  };
   
 
   return (
@@ -54,7 +61,7 @@ const RepoDetails = ({ repos }) => {
           <Sidebar
             repos={repos}
             handleRepoClick={handleRepoClick}
-            
+            onRepoDeleted={handleRepoDeleted}
           />
         </div>
 

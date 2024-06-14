@@ -88,7 +88,7 @@ const AllRepos = () => {
         {/* Show filter by oldest and forked repos */}
         <div>
           <div
-            className="flex justify-between items-center w-[10rem] py-2 px-6 rounded-2xl border cursor-pointer"
+            className="flex justify-between items-center w-[10rem] py-2 px-6 rounded-2xl border cursor-pointer caret-transparent"
             onClick={toggleFilterOptions}
           >
             <button className=" font-bold ">Filter</button>
@@ -175,26 +175,6 @@ const AllRepos = () => {
               ))}
         </div>
       )}
-      {/* 
-      <div className="">
-        <div className="flex items-center justify-between gap-8">
-          <button
-            onClick={handlePrevPage}
-            disabled={currentPage === 1}
-            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-          >
-            Previous
-          </button>
-          <span className="font-medium">{currentPage}</span>
-          <button
-            onClick={handleNextPage}
-            disabled={indexOfLastRepo >= repos.length}
-            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-          >
-            Next
-          </button>
-        </div>
-      </div> */}
 
       <div className="">
         {!isForkedFilter && ( // Conditionally render pagination buttons

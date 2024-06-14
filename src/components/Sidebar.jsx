@@ -7,32 +7,39 @@ import EditRepoForm from "./EditRepoForm";
 import AddNewRepoForm from "./AddNewRepoForm";
 import Swal from "sweetalert2";
 
-const Sidebar = ({ handleRepoClick, accessToken }) => {
-  const { repos, loading, deleteRepo,} = useContext(GitHubContext);
+const Sidebar = ({ handleRepoClick, onRepoDeleted }) => {
+  const { repos, loading, deleteRepo } = useContext(GitHubContext);
   const [searchQuery, setSearchQuery] = useState("");
   const [showNewRepoForm, setShowNewRepoForm] = useState(false);
   const [showEditRepoForm, setShowEditRepoForm] = useState(false);
   const [editRepoName, setEditRepoName] = useState("");
-  const [repoDescription, setRepoDescription] = useState(""); 
+  const [repoDescription, setRepoDescription] = useState("");
 
-  // Function to handle delete button click
   const handleDeleteButtonClick = async (repoName) => {
-    try {
-      if (repoName.toLowerCase().includes("demo")) {
-        const deletedRepo = await deleteRepo(repoName, accessToken);
-        if (deletedRepo) {
-       Swal.fire("Success!", "Repo deleted successfully!", "success");
-        }
-      } else {
+    const result = await Swal.fire({
+      title: `Are you sure you want to delete the repository "${repoName}"?`,
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonText: "Yes, delete it!",
+      cancelButtonText: "No, keep it",
+    });
+
+    if (result.isConfirmed) {
+      try {
+        await deleteRepo(repoName);
         Swal.fire(
-          "Error",
-          'Only repos containing "demo" in the name can be deleted.',
+          "Deleted!",
+          `Your repository "${repoName}" has been deleted.`,
+          "success"
+        );
+        onRepoDeleted(repoName);
+      } catch (error) {
+        Swal.fire(
+          "Error!",
+          `Failed to delete the repository "${repoName}".`,
           "error"
         );
       }
-    } catch (error) {
-      console.error("Error deleting repository:", error.message);
-      Swal.fire("Error", "Error deleting repository.", "error");
     }
   };
 
@@ -102,7 +109,10 @@ const Sidebar = ({ handleRepoClick, accessToken }) => {
 
                       <button
                         className="bg-[#D91F06] hover:bg-[#D7D7D7] hover:text-[#D91F06] text-[#e1f0fd] font-bold py-1 px-2 rounded"
-                        onClick={() => handleDeleteButtonClick(repo.name)}
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          handleDeleteButtonClick(repo.name);
+                        }}
                       >
                         Delete Repo
                       </button>
