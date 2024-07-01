@@ -17,8 +17,8 @@ function App() {
   }, [location.pathname]);
 
   return (
-    <>
-      <div>
+    
+      <div className="max-w-[1600px] mx-auto">
         <Header />
         <ScrollArrow />
         <Routes>
@@ -29,7 +29,7 @@ function App() {
         </Routes>
         <Footer />
       </div>
-    </>
+  
   );
 }
 
